@@ -46,6 +46,9 @@ public class Userinterface {
             if(parts[0].equals("eat")){
                 userChoice = "eat";
             }
+            if(parts[0].equals("equip")){
+                userChoice = "equip";
+            }
             switch (userChoice){
                 case "n", "go north", "north":
                     System.out.println("Going north...");
@@ -84,6 +87,14 @@ public class Userinterface {
                     break;
                 case "health":
                     System.out.println(adventure.getPlayer().getHealth());
+                    break;
+                case "equip":
+                    if(parts.length == 2){
+                        adventure.getPlayer().equipWeapon(parts[1]);
+                    }
+                    break;
+                case "attack":
+
                     break;
                 case "h", "help":
                     help();

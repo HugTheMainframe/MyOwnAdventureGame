@@ -4,6 +4,7 @@ public class Player {
     private Room currentRoom;
     private ArrayList<Item> inventory;
     private int health;
+    private Item currentWeapon;
 
     public Player(Room startingRoom){
         this.currentRoom = startingRoom;
@@ -78,6 +79,9 @@ public class Player {
         for(Item item : inventory){
             inv += item.toString();
         }
+        if(currentWeapon != null) {
+            inv += "\nyour current equipped weapon: " + currentWeapon;
+        }
         return inv;
     }
 
@@ -101,6 +105,19 @@ public class Player {
                     return;
                 } else {
                     System.out.println("Item not edible...");
+                }
+            }
+        }
+    }
+
+    public void equipWeapon(String name){
+        for(Item weap : inventory){
+            if(weap.getName().equalsIgnoreCase(name.toLowerCase())){
+                if(weap instanceof Weapon){
+                    currentWeapon = weap;
+                    inventory.remove(weap);
+                    System.out.println("You have equipped: " + weap);
+                    return;
                 }
             }
         }

@@ -65,21 +65,19 @@ public class Map {
         room8.setEastConnection(room9);
         room9.setNorthConnection(room6);
         room9.setWestConnection(room8);
-        Item sword = new Item("Sword", "Very sharp edge");
         Item teespoon = new Item("Teespoon", "is very dangerous");
-        Item bow = new Item("Bow of light", "Will perish dark creatures");
-        Item spear = new Item("Long Spear", "Will reach you from very far distance");
         Food apple = new Food("Apple", "Will protect you from the doctor", 25);
         Food banana = new Food("Banana", "Restore your calcium deficit", 50);
         Food poison = new Food("Poison", "Don't like your life. Here drink..", -100);
+        Item clock = new Item("A golden clock", "Will tell the time of midnight");
+        Weapon sword = new MeleeWeapon("Sword", "very average blade", 10, 10);
 
-        room1.addItems(sword);
-        room1.addItems(bow);
         room1.addItems(teespoon);
-        room8.addItems(spear);
-        room1.addItems(apple);
-        room2.addItems(banana);
-        room2.addItems(poison);
+        room3.addItems(apple);
+        room5.addItems(banana);
+        room8.addItems(poison);
+        room4.addItems(clock);
+        room1.addItems(sword);
 
         currentRoom = room1;
 

@@ -43,6 +43,9 @@ public class Userinterface {
             if(parts[0].equals("drop") || parts[0].equals("d")){
                 userChoice = "drop";
             }
+            if(parts[0].equals("eat")){
+                userChoice = "eat";
+            }
             switch (userChoice){
                 case "n", "go north", "north":
                     System.out.println("Going north...");
@@ -67,16 +70,20 @@ public class Userinterface {
                 case "take", "t":
                     if(parts.length == 2) {
                         adventure.getPlayer().takeItem(parts[1]);
-                    } else {
-                        System.out.println("No item with that name...");
                     }
                     break;
                 case "drop", "d":
                     if(parts.length == 2){
                         adventure.getPlayer().dropItem(parts[1]);
-                    } else {
-                        System.out.println("No item with that name...");
                     }
+                    break;
+                case "eat":
+                    if(parts.length == 2){
+                        adventure.getPlayer().eat(parts[1]);
+                    }
+                    break;
+                case "health":
+                    System.out.println(adventure.getPlayer().getHealth());
                     break;
                 case "h", "help":
                     help();

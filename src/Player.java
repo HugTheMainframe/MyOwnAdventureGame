@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class Player {
     private Room currentRoom;
     private ArrayList<Item> inventory;
+    private int health;
 
     public Player(Room startingRoom){
         this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
+        this.health = 100;
     }
 
     public String goNorth() {
@@ -42,7 +44,12 @@ public class Player {
     }
 
     public String getRoomNameAndDescription(){
-        return currentRoom.getRoomName() + currentRoom.getRoomDescription() + "\nItems: " + currentRoom.getItemsInRoom();
+        String roomInfo = "";
+        roomInfo += currentRoom.getRoomName() + currentRoom.getRoomDescription();
+        if(!currentRoom.getItems().isEmpty()){
+            roomInfo += "\nItems:" + currentRoom.getItemsInRoom();
+        }
+        return roomInfo;
     }
 
     public void takeItem(String itemName){
@@ -74,7 +81,40 @@ public class Player {
         return inv;
     }
 
+    public void eat(String name){
+        for (Item item : currentRoom.getItems()){
+          if(item.getName().equalsIgnoreCase(name.toLowerCase())){
+              if(item instanceof Food){
+                  setHealth(((Food) item).getHealth());
+                  currentRoom.removeItem(item);
+                  return;
+              } else {
+                  System.out.println("Item not edible...");
+              }
+          }
+        }
+        for (Item item : inventory){
+            if(item.getName().equalsIgnoreCase(name.toLowerCase())){
+                if(item instanceof Food){
+                    setHealth(((Food) item).getHealth());
+                    inventory.remove(item);
+                    return;
+                } else {
+                    System.out.println("Item not edible...");
+                }
+            }
+        }
+    }
+
     public Room getCurrentRoom() {
         return currentRoom;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void setHealth(int health){
+        this.health += health;
     }
 }

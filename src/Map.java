@@ -69,11 +69,17 @@ public class Map {
         Item teespoon = new Item("Teespoon", "is very dangerous");
         Item bow = new Item("Bow of light", "Will perish dark creatures");
         Item spear = new Item("Long Spear", "Will reach you from very far distance");
+        Food apple = new Food("Apple", "Will protect you from the doctor", 25);
+        Food banana = new Food("Banana", "Restore your calcium deficit", 50);
+        Food poison = new Food("Poison", "Don't like your life. Here drink..", -100);
 
         room1.addItems(sword);
         room1.addItems(bow);
         room1.addItems(teespoon);
         room8.addItems(spear);
+        room1.addItems(apple);
+        room2.addItems(banana);
+        room2.addItems(poison);
 
         currentRoom = room1;
 

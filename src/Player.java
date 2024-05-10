@@ -146,11 +146,22 @@ public class Player {
                             System.out.println("You attack " + target.getName() + " with " + damage);
                             target.setHealth(-damage);
                             System.out.println("Enemy health now " + target.getHealth());
-                            Weapon enemyWeapon = (Weapon) target.getCurrentWeapon();
-                            int enemyDamage = enemyWeapon.attack();
-                            System.out.println("Enemy " + target.getName() + " attacks you with " + enemyDamage);
-                            setHealth(-enemyDamage);
-                            System.out.println("Your health now " + health);
+                            if(target.getHealth() < 0){
+                                System.out.println("Your slayed the enemy");
+                                Item enemybody = new Item("dead" + target.getName(), "slayed");
+                                currentRoom.addItems(target.getCurrentWeapon());
+                                System.out.println("enemy dropped" + target.getCurrentWeapon());
+                                currentRoom.addItems(enemybody);
+                                currentRoom.removeEnemies(target);
+                                return;
+                            } else {
+                                Weapon enemyWeapon = (Weapon) target.getCurrentWeapon();
+                                int enemyDamage = enemyWeapon.attack();
+                                System.out.println("Enemy " + target.getName() + " attacks you with " + enemyDamage);
+                                setHealth(-enemyDamage);
+                                System.out.println("Your health now " + health);
+                                return;
+                            }
                         } else {
                             System.out.println("No enemy with that name...");
                         }

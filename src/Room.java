@@ -83,6 +83,10 @@ public class Room {
         enemies.add(enemy);
     }
 
+    public void removeEnemies(Enemy enemy){
+        enemies.remove(enemy);
+    }
+
     public String getEnemiesInRoom(){
         String enemyList = "";
         for(Enemy ene : enemies){

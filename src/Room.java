@@ -8,6 +8,7 @@ public class Room {
     private Room eastConnection;
     private Room westConnection;
     private ArrayList<Item> items;
+    private ArrayList<Enemy> enemies;
 
     public Room(String roomName, String roomDescription){
         this.roomName = roomName;
@@ -17,6 +18,7 @@ public class Room {
         this.eastConnection = null;
         this.westConnection = null;
         this.items = new ArrayList<>();
+        this.enemies = new ArrayList<>();
     }
 
     public void setNorthConnection(Room room){
@@ -75,6 +77,22 @@ public class Room {
     }
     public void removeItem(Item items){
         getItems().remove(items);
+    }
+
+    public void addEnemies(Enemy enemy){
+        enemies.add(enemy);
+    }
+
+    public String getEnemiesInRoom(){
+        String enemyList = "";
+        for(Enemy ene : enemies){
+            enemyList += ene.toString();
+        }
+        return enemyList;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 
 }

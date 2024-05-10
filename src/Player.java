@@ -10,6 +10,7 @@ public class Player {
         this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
         this.health = 100;
+        this.currentWeapon = null;
     }
 
     public String goNorth() {
@@ -50,6 +51,9 @@ public class Player {
         if(!currentRoom.getItems().isEmpty()){
             roomInfo += "\nItems:" + currentRoom.getItemsInRoom();
         }
+        if(!currentRoom.getEnemies().isEmpty()){
+            roomInfo += "\nEnemies! Prepare yourself:\n" + currentRoom.getEnemiesInRoom();
+        }
         return roomInfo;
     }
 
@@ -63,16 +67,15 @@ public class Player {
         }
     }
 
-    public void dropItem(String itemName){
-        for(Item item : inventory){
-            if (item.getName().equalsIgnoreCase(itemName.toLowerCase())){
+    public void dropItem(String itemName) {
+        for (Item item : inventory) {
+            if (item.getName().equalsIgnoreCase(itemName.toLowerCase())) {
                 currentRoom.addItems(item);
                 inventory.remove(item);
                 return;
             }
         }
     }
-
 
     public String showInventory(){
         String inv = "";
@@ -114,13 +117,33 @@ public class Player {
         for(Item weap : inventory){
             if(weap.getName().equalsIgnoreCase(name.toLowerCase())){
                 if(weap instanceof Weapon){
-                    currentWeapon = weap;
-                    inventory.remove(weap);
-                    System.out.println("You have equipped: " + weap);
-                    return;
+                    if(currentWeapon == null) {
+                        currentWeapon = weap;
+                        inventory.remove(weap);
+                        System.out.println("You have equipped: " + weap);
+                        return;
+                    } else {
+                        inventory.add(currentWeapon);
+                        currentWeapon = weap;
+                        inventory.remove(weap);
+                        System.out.println("You have equipped; " + weap);
+                        return;
+                    }
+                } else {
+                    System.out.println("Item not a weapon");
                 }
             }
         }
+    }
+
+    public void attack(){
+            if(currentWeapon instanceof Weapon){
+                Weapon weapon = (Weapon) currentWeapon;
+                int damage = weapon.attack();
+                System.out.println("You attack with " + damage);
+            } else {
+                System.out.println("You have no weapon equipped.");
+            }
     }
 
     public Room getCurrentRoom() {

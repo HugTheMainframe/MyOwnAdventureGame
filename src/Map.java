@@ -71,6 +71,8 @@ public class Map {
         Food poison = new Food("Poison", "Don't like your life. Here drink..", -100);
         Item clock = new Item("A golden clock", "Will tell the time of midnight");
         Weapon sword = new MeleeWeapon("Sword", "very average blade", 10, 10);
+        Weapon spear = new MeleeWeapon("Spear", "Will reach you from afare", 4, 20);
+        Weapon goldenSpear = new MeleeWeapon("GoldenSpear", "Will smite you", 3, 50);
 
         room1.addItems(teespoon);
         room3.addItems(apple);
@@ -78,7 +80,10 @@ public class Map {
         room8.addItems(poison);
         room4.addItems(clock);
         room1.addItems(sword);
+        room1.addItems(spear);
 
+        Enemy gobling = new Enemy("Gobling", "Seeks treasures which insnt theres", 50, goldenSpear);
+        room1.addEnemies(gobling);
         currentRoom = room1;
 
     }

@@ -94,7 +94,7 @@ public class Userinterface {
                     }
                     break;
                 case "attack":
-
+                        adventure.getPlayer().attack();
                     break;
                 case "h", "help":
                     help();

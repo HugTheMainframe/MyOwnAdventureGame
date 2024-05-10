@@ -16,7 +16,7 @@ public class Enemy {
     }
 
     public void setHealth(int health){
-        this.health = health;
+        this.health += health;
     }
 
     public String getName(){
@@ -46,7 +46,7 @@ public class Enemy {
     @Override
     public String toString(){
         String enemyInfo = "";
-        enemyInfo += name + ", " + description;
+        enemyInfo += name + "(" + health + "HP)" + ", " + description;
         return enemyInfo;
     }
 }

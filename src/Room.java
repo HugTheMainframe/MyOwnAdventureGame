@@ -94,5 +94,4 @@ public class Room {
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
-
 }

@@ -136,11 +136,28 @@ public class Player {
         }
     }
 
-    public void attack(){
+    public void attack(String enemy){
             if(currentWeapon instanceof Weapon){
-                Weapon weapon = (Weapon) currentWeapon;
-                int damage = weapon.attack();
-                System.out.println("You attack with " + damage);
+                Weapon playerWeapon = (Weapon) currentWeapon;
+                int damage = playerWeapon.attack();
+                if(!currentRoom.getEnemiesInRoom().isEmpty()) {
+                    for(Enemy target : currentRoom.getEnemies()){
+                        if(target.getName().equalsIgnoreCase(enemy.toLowerCase())){
+                            System.out.println("You attack " + target.getName() + " with " + damage);
+                            target.setHealth(-damage);
+                            System.out.println("Enemy health now " + target.getHealth());
+                            Weapon enemyWeapon = (Weapon) target.getCurrentWeapon();
+                            int enemyDamage = enemyWeapon.attack();
+                            System.out.println("Enemy " + target.getName() + " attacks you with " + enemyDamage);
+                            setHealth(-enemyDamage);
+                            System.out.println("Your health now " + health);
+                        } else {
+                            System.out.println("No enemy with that name...");
+                        }
+                    }
+                } else {
+                    System.out.println("you attack the air, why?!?!");
+                }
             } else {
                 System.out.println("You have no weapon equipped.");
             }
